@@ -1,6 +1,5 @@
 baseURL: "https://abhijeetm.xyz/"
 title: ""
-paginate: 5
 theme: papermod
 
 enableRobotsTXT: true

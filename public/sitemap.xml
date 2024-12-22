@@ -2,23 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://abhijeetm.xyz/</loc>
     <lastmod>2024-12-22T13:56:38+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tech/rtpengine/</loc>
+    <loc>https://abhijeetm.xyz/tech/rtpengine/</loc>
     <lastmod>2024-12-22T13:56:38+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tech/</loc>
+    <loc>https://abhijeetm.xyz/tech/</loc>
     <lastmod>2024-12-22T13:56:38+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/aboutme/</loc>
+    <loc>https://abhijeetm.xyz/travel/</loc>
+    <lastmod>2024-12-22T13:56:38+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/travel/tungnath/</loc>
+    <loc>https://abhijeetm.xyz/travel/tungnath/</loc>
+    <lastmod>2024-12-22T13:56:38+05:30</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://abhijeetm.xyz/aboutme/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://abhijeetm.xyz/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/travel/</loc>
+    <loc>https://abhijeetm.xyz/tags/</loc>
   </url>
 </urlset>
