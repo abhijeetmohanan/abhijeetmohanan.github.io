@@ -1,92 +1,94 @@
 baseURL: "https://abhijeetmohanan.github.io/"
-title: "Abhijeet Mohanan | Infrastructure Engineer"
-theme: papermod
+languageCode: "en-us"
+title: "Abhijeet Mohanan - DevOps Engineer"
+theme: hugo-profile
 
-enableRobotsTXT: true
-buildDrafts: false
-buildFuture: false
-buildExpired: false
-
-minify:
-  disableXML: true
-  minifyOutput: true
+defaultContentLanguage: "en"
 
 params:
-  env: production 
   title: "Abhijeet Mohanan"
-  description: "Personal Portfolio and Blog of an Infrastructure Engineer specializing in Kubernetes, AWS, Networking, and Containers."
-  keywords: [Infrastructure Engineer, Kubernetes, AWS, Networking, Containers, Platform Engineering, DevOps]
-  author: Abhijeet Mohanan
-  
-  DateFormat: "January 2, 2006"
-  defaultTheme: auto
-  disableThemeToggle: false
+  description: "Portfolio of Abhijeet Mohanan, a DevOps Engineer."
+  favicon: "/terminal.svg"
 
-  ShowReadingTime: true
-  ShowShareButtons: true
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
-  ShowCodeCopyButtons: true
-  ShowWordCount: true
-  UseHugoToc: true
-  disableSpecial1stPost: false
-  disableScrollToTop: false
-  comments: false
-  hidemeta: false
-  hideSummary: false
-  showtoc: false
-  tocopen: false
+  theme:
+    defaultTheme: "dark"
 
-  label:
-    text: "Abhijeet Mohanan"
-    icon: /terminal.svg
-    iconHeight: 35
+  hero:
+    enable: true
+    intro: "Hi, my name is"
+    title: "Abhijeet Mohanan."
+    subtitle: "I build robust cloud-native infrastructure."
+    content: "A dedicated DevOps Engineer with expertise in Kubernetes, AWS, and autoscaling. I specialize in turning complex infrastructure challenges into highly reliable, automated platforms."
+    button:
+      enable: true
+      name: "Contact Me"
+      url: "mailto:abhijeetmohanan@gmail.com"
+      download: false
+    socialLinks:
+      fontAwesomeIcons:
+        - icon: fab fa-github
+          url: https://github.com/abhijeetmohanan
+        - icon: fab fa-linkedin
+          url: https://linkedin.com/in/abhijeetmohanan
+        - icon: fas fa-envelope
+          url: mailto:abhijeetmohanan@gmail.com
 
-  # home-info mode
-  profileMode:
-    enabled: true
-    title: "Hi, I'm Abhijeet 👋"
-    subtitle: "Infrastructure & Platform Engineer\n\nI build scalable, secure, and resilient infrastructure. Expert in Kubernetes, AWS, complex Networking, and Container Orchestration."
-    buttons:
-      - name: About Me
-        url: /about
-      - name: Projects & Tech
-        url: /tech
-      - name: Blog
-        url: /posts
+  about:
+    enable: true
+    title: "About Me"
+    content: |
+      I am a dedicated **DevOps Engineer** with over four years of experience in building and operating cloud-native platforms. My expertise lies in Kubernetes, autoscaling, and Infrastructure as Code, alongside a commitment to optimizing costs and ensuring reliability. I have successfully enabled developer self-service platforms and enhanced observability across applications.
+    skills:
+      enable: true
+      title: "Core Technologies & Skills:"
+      items:
+        - Kubernetes
+        - AWS (EKS, EC2, RDS, Lambda)
+        - Terraform & CloudFormation
+        - GitOps (ArgoCD, GitLab)
+        - Observability (Prometheus, Grafana, Loki)
+        - Karpenter & KEDA
 
-  socialIcons:
-    - name: linkedin
-      url: "https://linkedin.com/in/abhijeetmohanan"
-    - name: github
-      url: "https://github.com/abhijeetmohanan"
-    - name: email
-      url: "mailto:your.email@example.com"
+  experience:
+    enable: true
+    title: "Experience"
+    items:
+      - company: "Skit.ai"
+        companyUrl: "https://skit.ai"
+        jobs:
+          - name: "DevOps Engineer"
+            date: "Jan 2022 - Present"
+            content: |
+              - Built Kubernetes platforms for application & ML workloads.
+              - Implemented Karpenter and KEDA, optimizing workloads and reducing infra costs by 30%.
+              - Led incident response (JIRA, OpsGenie), reducing MTTR by 40%.
+              - Delivered CI/CD pipelines integrated with GitOps (ArgoCD + GitLab).
+              - Rolled out observability stack (Prometheus, Grafana, Loki) and automated DORA metrics.
+              - Improved pre-production uptime from 50% to 95%.
+          - name: "DevOps Support Engineer"
+            date: "Aug 2021 - Jan 2022"
+            content: |
+              - Migrated workloads from bare-metal to AWS EKS using Terraform.
+              - Automated infra rollouts, reducing delivery time by 70%.
+              - Reduced infra costs by consolidating ALBs and optimizing cloud usage.
+      - company: "Vernacular.ai | Skit.ai"
+        jobs:
+          - name: "DevOps Intern"
+            date: "Apr 2021 - Jul 2021"
+            content: |
+              - Assisted with Kubernetes upgrades and syslog + Promtail logging integration.
+              - Evaluated monitoring solutions (Zabbix vs Prometheus).
 
-menu:
-  main:
-    - identifier: about
-      name: About Me
-      url: /about/
-      weight: 10
-    - identifier: experience
-      name: Experience
-      url: /experience/
-      weight: 15
-    - identifier: tech
-      name: Tech & Projects
-      url: /tech/
-      weight: 20
-    - identifier: posts
-      name: Blog
-      url: /posts/
-      weight: 30 
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 40
-
-pygmentsUseClasses: true
-markup:
-  highlight:
-    noClasses: false
+  education:
+    enable: true
+    title: "Education & Certifications"
+    items:
+      - title: "B.Tech in Electronics & Telecommunication"
+        institution: "MGM’s JNEC, Aurangabad"
+        date: "Aug 2017 - May 2021"
+      - title: "Certified Kubernetes Administrator (CKA)"
+        institution: "Cloud Native Computing Foundation"
+      - title: "Red Hat Certified Engineer (RHCE)"
+        institution: "Red Hat"
+      - title: "Specialist in OpenShift Administration"
+        institution: "Red Hat"
