@@ -10,6 +10,44 @@ params:
   description: "Portfolio of Abhijeet Mohanan, a DevOps Engineer."
   favicon: "/terminal.svg"
 
+  customScripts: |
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        anime({
+          targets: '.content h1',
+          translateY: [-50, 0],
+          opacity: [0, 1],
+          duration: 1500,
+          easing: 'easeOutExpo',
+          delay: 500
+        });
+        anime({
+          targets: '.content h2',
+          translateX: [-50, 0],
+          opacity: [0, 1],
+          duration: 1500,
+          easing: 'easeOutExpo',
+          delay: 700
+        });
+        anime({
+          targets: '.hero-content',
+          translateY: [20, 0],
+          opacity: [0, 1],
+          duration: 1500,
+          easing: 'easeOutExpo',
+          delay: 900
+        });
+        anime({
+          targets: '.img-thumbnail',
+          scale: [0.8, 1],
+          opacity: [0, 1],
+          duration: 2000,
+          easing: 'easeOutElastic(1, .8)',
+          delay: 200
+        });
+      });
+    </script>
   theme:
     defaultTheme: "dark"
 
