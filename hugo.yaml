@@ -13,6 +13,19 @@ params:
   theme:
     defaultTheme: "dark"
 
+  color:
+    textColor: "#2C3333"
+    secondaryTextColor: "#F5F5F5"
+    backgroundColor: "#54BAB9"
+    primaryColor: "#F0F0F0"
+    secondaryColor: "#78C2C3"
+    darkmode:
+      textColor: "#F5F5F5"
+      secondaryTextColor: "#F5F5F5"
+      backgroundColor: "#313552"
+      primaryColor: "#F1E0AC"
+      secondaryColor: "#30475E"
+
   hero:
     enable: true
     intro: "Hi, my name is"
