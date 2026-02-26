@@ -69,6 +69,10 @@ menu:
       name: About Me
       url: /about/
       weight: 10
+    - identifier: experience
+      name: Experience
+      url: /experience/
+      weight: 15
     - identifier: tech
       name: Tech & Projects
       url: /tech/
