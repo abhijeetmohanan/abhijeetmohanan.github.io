@@ -1,0 +1,54 @@
+name: Deploy Static Portfolio to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master # Set to your default branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Use a Node.js version compatible with Next.js 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js project
+        run: npm run build
+
+      - name: Export Next.js static site
+        run: npm run export # next export is typically handled by `next build` with output: 'export' in next.config.js for Next.js 13+
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./out # Directory containing the static export (from next.config.js output: "export")
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
+
+# Note on basePath:
+# The current next.config.js has basePath: "/portfolio" and assetPrefix: "/portfolio/".
+# If you are deploying this project to a User Page (e.g., abhijeetmohanan.github.io)
+# and want it to serve from the root of that domain, you MUST change
+# basePath and assetPrefix to "/" in next.config.js.
+# If this is for a project page (e.g., username.github.io/repo-name),
+# then basePath should match your repository name (e.g., "/repo-name").
