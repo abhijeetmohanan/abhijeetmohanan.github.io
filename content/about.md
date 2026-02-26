@@ -2,6 +2,7 @@
 title: "About Me"
 date: 2024-02-26T12:00:00Z
 draft: false
+tags: ["info"]
 ---
 
 ## Hi, I'm Abhijeet Mohanan 👋

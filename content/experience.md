@@ -2,6 +2,7 @@
 title: "Experience"
 date: 2024-02-26T12:00:00Z
 draft: false
+tags: ["info"]
 ---
 
 Here is a detailed breakdown of my professional journey and the impact I've made along the way.
