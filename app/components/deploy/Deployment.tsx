@@ -63,29 +63,35 @@ const provisioningSequence = [
 
 const Deployment: React.FC = () => {
   const deployLogRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const setMode = useAppStore((state) => state.setMode);
 
   useEffect(() => {
-    if (deployLogRef.current) {
+    if (deployLogRef.current && progressBarRef.current) {
       const tl = gsap.timeline({
         onComplete: () => {
-          setMode('scene');
+          setTimeout(() => setMode('scene'), 1000); // Wait a second before switching
         },
       });
+
+      const totalDuration = terraformPlan.length * 0.08 + provisioningSequence.length * 0.08;
+      tl.to(progressBarRef.current, { width: '100%', duration: totalDuration, ease: 'linear' });
 
       // Animate Terraform Plan Output
       terraformPlan.forEach((line) => {
         tl.to({}, {
-          duration: line.length * 0.03, // Base duration on line length
+          duration: 0.05,
           onComplete: () => {
             const p = document.createElement('p');
             p.textContent = line;
+            if (line.startsWith('+')) p.style.color = '#34D399'; // Green for additions
+            if (line.startsWith('Plan:')) p.style.color = '#FBBF24'; // Amber for plan summary
             p.style.opacity = '0';
             deployLogRef.current?.appendChild(p);
             gsap.to(p, { opacity: 1, duration: 0.1 });
             deployLogRef.current!.scrollTop = deployLogRef.current!.scrollHeight; // Auto-scroll
           }
-        }, "+=0.05"); // Small delay between lines
+        }, "-=0.02");
       });
 
       tl.to({}, { duration: 1 }); // Pause after plan
@@ -93,16 +99,19 @@ const Deployment: React.FC = () => {
       // Animate Provisioning Sequence
       provisioningSequence.forEach((line) => {
         tl.to({}, {
-          duration: line.length * 0.03, // Base duration on line length
+          duration: 0.05,
           onComplete: () => {
             const p = document.createElement('p');
             p.textContent = line;
+            if (line.includes('Creating...')) p.style.color = '#60A5FA'; // Blue for creating
+            if (line.includes('complete after')) p.style.color = '#34D399'; // Green for complete
+            if (line.includes('Deployment complete')) p.style.color = '#FBBF24'; // Amber for final summary
             p.style.opacity = '0';
             deployLogRef.current?.appendChild(p);
             gsap.to(p, { opacity: 1, duration: 0.1 });
             deployLogRef.current!.scrollTop = deployLogRef.current!.scrollHeight; // Auto-scroll
           }
-        }, "+=0.05"); // Small delay between lines
+        }, "-=0.02");
       });
 
       return () => {
@@ -112,13 +121,20 @@ const Deployment: React.FC = () => {
   }, [setMode]);
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen bg-background text-green-400 font-mono p-4">
-      <h2 className="text-xl font-bold mb-4">Deploying Infrastructure...</h2>
-      <div
-        ref={deployLogRef}
-        className="text-left w-full max-w-4xl h-96 overflow-y-auto bg-gray-800 p-4 rounded-lg shadow-inner"
-      >
-        {/* Deployment logs will be appended here by GSAP */}
+    <div className="flex flex-col items-center justify-start min-h-screen bg-background text-gray-300 font-mono p-4">
+      <h2 className="text-2xl font-bold mb-4 text-accent">Deploying Infrastructure with Terraform...</h2>
+      <div className="w-full max-w-4xl bg-gray-900 rounded-lg shadow-lg border border-accent">
+        <div className="p-4">
+          <div className="bg-gray-700 rounded-full h-2.5 w-full mb-4">
+            <div ref={progressBarRef} className="bg-green-500 h-2.5 rounded-full" style={{ width: '0%' }}></div>
+          </div>
+          <div
+            ref={deployLogRef}
+            className="text-left h-96 overflow-y-auto bg-gray-800 p-4 rounded-lg shadow-inner"
+          >
+            {/* Deployment logs will be appended here by GSAP */}
+          </div>
+        </div>
       </div>
     </div>
   );

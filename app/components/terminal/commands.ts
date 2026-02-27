@@ -1,3 +1,30 @@
+export const whoamiContent = `
+Abhijeet Mohanan
+DevOps Engineer
+Email: abhijeetmohanan@gmail.com
+LinkedIn: https://www.linkedin.com/in/abhijeet-mohanan/
+GitHub: https://github.com/abhijeetmohanan
+`;
+
+export const experienceLsContent = `
+skit.ai
+vernacular.ai
+`;
+
+export const skitAiContent = `
+DevOps Engineer, Skit.ai
+🗓 01/2022 → Present
+- Built Kubernetes platforms for application & ML workloads with exposure to OpenSIPS + RTPengine for SIP/RTP scaling
+- Led incident response and root cause analysis (RCA), reducing MTTR by 40% through structured workflows and automation with JIRA, OpsGenie, and Grafana; implemented on-call rotations and post-incident reviews with cross-functional teams, driving continuous improvements in reliability and resilience.
+- Partnered with cross-functional teams to gather requirements and enable Go Live for various projects.
+- Mentored interns on cloud-native fundamentals, including Kubernetes and Terraform best practices; accelerated their onboarding process, enabling them to contribute to production-level tasks within 4 weeks.
+- Implemented Karpenter (cluster autoscaling) and KEDA (event-driven scaling), optimizing workloads and reducing infra costs by 30%
+- Delivered CI/CD pipelines integrated with GitOps (ArgoCD + GitLab), improving deployment speed and reliability
+- Developed reusable Helm charts & Terraform modules to enable developer self-service infrastructure provisioning
+- Rolled out observability stack (Prometheus, Grafana, Loki); created Python tooling for DORA metrics collection in PostgreSQL
+- Improved pre-production uptime from 50% → 95% with workload optimization and spot instance strategies
+`;
+
 export const skillsContent = `
 Cloud & Orchestration: Kubernetes, AWS (Lambda, EC2, RDS, CloudFormation, EKS, CloudWatch), OpenShift, Linkerd, Istio, Kong
 Infrastructure as Code: Terraform, CloudFormation, Ansible
@@ -75,6 +102,9 @@ No projects currently listed in terminal. Please check my GitHub profile for rep
 export const helpContent = `
 Available commands:
   help      - Display this help message
+  whoami    - Display my contact information
+  ls /experience - List my work experience
+  cat /experience/skit.ai - Show details about my experience at Skit.ai
   projects  - List my notable projects
   skills    - Show my technical skills
   resume    - Display my full resume

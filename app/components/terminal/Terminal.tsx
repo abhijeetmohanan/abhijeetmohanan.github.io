@@ -10,6 +10,9 @@ import {
   resumeContent,
   projectsContent,
   helpContent,
+  whoamiContent,
+  experienceLsContent,
+  skitAiContent,
 } from './commands';
 
 interface CommandHandler {
@@ -39,6 +42,19 @@ const Terminal: React.FC = () => {
 
   const commandHandlers: { [key: string]: CommandHandler } = {
     help: () => helpContent,
+    whoami: () => whoamiContent,
+    ls: (args: string[]) => {
+      if (args[0] === '/experience') {
+        return experienceLsContent;
+      }
+      return 'ls: cannot access \'' + args[0] + '\': No such file or directory';
+    },
+    cat: (args: string[]) => {
+      if (args[0] === '/experience/skit.ai') {
+        return skitAiContent;
+      }
+      return 'cat: cannot access \'' + args[0] + '\': No such file or directory';
+    },
     projects: () => projectsContent,
     skills: () => skillsContent,
     resume: () => resumeContent,

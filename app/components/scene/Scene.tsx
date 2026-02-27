@@ -3,20 +3,16 @@ import * as THREE from 'three';
 import { useAppStore } from '../../store';
 import gsap from 'gsap';
 
-interface ObjectConfig {
+interface ExperienceConfig {
   name: string;
-  type: 'vpc' | 'ec2' | 'kubernetes' | 's3' | 'loadbalancer';
+  company: string;
   position: THREE.Vector3;
   color: number;
 }
 
-const objectConfigs: ObjectConfig[] = [
-  { name: 'VPC', type: 'vpc', position: new THREE.Vector3(0, 0, 0), color: 0x00f0ff },
-  { name: 'EC2 Instance 1', type: 'ec2', position: new THREE.Vector3(-15, 10, -10), color: 0x00aaff },
-  { name: 'EC2 Instance 2', type: 'ec2', position: new THREE.Vector3(15, 10, -10), color: 0x00aaff },
-  { name: 'Kubernetes Cluster', type: 'kubernetes', position: new THREE.Vector3(0, -10, 0), color: 0xccff00 },
-  { name: 'S3 Bucket', type: 's3', position: new THREE.Vector3(-20, -5, 20), color: 0xffcc00 },
-  { name: 'Load Balancer', type: 'loadbalancer', position: new THREE.Vector3(0, 15, -25), color: 0xff00ff },
+const experienceConfigs: ExperienceConfig[] = [
+  { name: 'Skit.ai', company: 'Skit.ai', position: new THREE.Vector3(0, 0, 0), color: 0x00f0ff },
+  { name: 'Vernacular.ai', company: 'Vernacular.ai', position: new THREE.Vector3(-20, 10, -10), color: 0x00aaff },
 ];
 
 const Scene: React.FC = () => {
@@ -37,52 +33,26 @@ const Scene: React.FC = () => {
     }
   }, []);
 
-  const createObject = useCallback((config: ObjectConfig) => {
-    let geometry: THREE.BufferGeometry;
-    let material: THREE.MeshPhongMaterial;
+  const createObject = useCallback((config: ExperienceConfig) => {
+    const group = new THREE.Group();
+    group.name = config.name;
 
-    switch (config.type) {
-      case 'vpc':
-        geometry = new THREE.TorusGeometry(30, 0.5, 16, 100);
-        break;
-      case 'ec2':
-        geometry = new THREE.BoxGeometry(5, 5, 5);
-        break;
-      case 'kubernetes':
-        geometry = new THREE.BoxGeometry(3, 3, 3); // Individual cube
-        break;
-      case 's3':
-        geometry = new THREE.CylinderGeometry(8, 8, 12, 32);
-        break;
-      case 'loadbalancer':
-        geometry = new THREE.BoxGeometry(15, 2, 5);
-        break;
-      default:
-        geometry = new THREE.BoxGeometry(5, 5, 5);
-    }
+    const podMaterial = new THREE.MeshPhongMaterial({ color: config.color, flatShading: true });
+    const podGeometry = new THREE.CapsuleGeometry(2, 4, 4, 8);
+    const pod = new THREE.Mesh(podGeometry, podMaterial);
+    pod.rotation.z = Math.PI / 2;
+    group.add(pod);
 
-    material = new THREE.MeshPhongMaterial({ color: config.color, flatShading: true });
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.position.copy(config.position);
-    mesh.name = config.name; // Store original name
-    (mesh.userData as any).originalColor = config.color; // Store original color
+    const ringGeometry = new THREE.TorusGeometry(4, 0.2, 16, 100);
+    const ringMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+    ring.rotation.x = Math.PI / 2;
+    group.add(ring);
 
-    if (config.type === 'kubernetes') {
-      const group = new THREE.Group();
-      group.name = config.name;
-      for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
-          const cube = new THREE.Mesh(geometry, material);
-          cube.position.set((i - 1) * 4, (j - 1) * 4, 0);
-          group.add(cube);
-        }
-      }
-      group.position.copy(config.position);
-      (group.userData as any).originalColor = config.color;
-      return group;
-    }
+    group.position.copy(config.position);
+    (group.userData as any).originalColor = config.color;
 
-    return mesh;
+    return group;
   }, []);
 
   useEffect(() => {
@@ -118,7 +88,7 @@ const Scene: React.FC = () => {
 
     // Objects
     const interactableObjects: THREE.Object3D[] = [];
-    objectConfigs.forEach(config => {
+    experienceConfigs.forEach(config => {
       const obj = createObject(config);
       scene.add(obj);
       interactableObjects.push(obj);
@@ -199,13 +169,10 @@ const Scene: React.FC = () => {
     const animate = () => {
       requestAnimationFrame(animate);
 
-      // Rotate some objects for subtle animation
-      const vpc = scene.getObjectByName('VPC');
-      if (vpc) vpc.rotation.z += 0.001;
-      const lb = scene.getObjectByName('Load Balancer');
-      if (lb) lb.rotation.y += 0.005;
-      const k8s = scene.getObjectByName('Kubernetes Cluster');
-      if (k8s) k8s.children.forEach(cube => cube.rotation.y += 0.01);
+      // Rotate pods
+      interactableObjects.forEach(obj => {
+        obj.rotation.y += 0.01;
+      });
 
       renderer.render(scene, camera);
       onHover(); // Check hover state on each frame
