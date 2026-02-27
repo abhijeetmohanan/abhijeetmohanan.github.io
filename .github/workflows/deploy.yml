@@ -6,7 +6,7 @@ on:
       - master # Set to your default branch
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,17 +23,21 @@ jobs:
       - name: Build Next.js project
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
-          publish_branch: gh-pages
+          path: ./out
 
-# Note on basePath:
-# The current next.config.js has basePath: "/portfolio" and assetPrefix: "/portfolio/".
-# If you are deploying this project to a User Page (e.g., abhijeetmohanan.github.io)
-# and want it to serve from the root of that domain, you MUST change
-# basePath and assetPrefix to "/" in next.config.js.
-# If this is for a project page (e.g., username.github.io/repo-name),
-# then basePath should match your repository name (e.g., "/repo-name").
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
