@@ -52,10 +52,10 @@ function HomeContent() {
           Building scalable cloud infrastructure, automating deployments, 
           and enabling developer productivity through platform engineering.
         </p>
-        <div className="flex flex-wrap justify-center gap-4 mb-8">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           <button
             onClick={() => setMode('experience')}
-            className="px-6 py-3 rounded-lg font-medium transition-all bg-accent text-black hover:bg-accent/80"
+            className="px-6 py-3 rounded-lg font-medium transition-all bg-accent text-slate-900 hover:bg-accent/80"
           >
             View Experience
           </button>
@@ -67,14 +67,14 @@ function HomeContent() {
           </button>
         </div>
 
-        <div className="flex justify-center gap-6 text-2xl">
-          <a href="mailto:abhijeetmohanan@gmail.com" className="text-accent hover:opacity-70" title="Email">
+        <div className="flex justify-center gap-8 text-3xl">
+          <a href="mailto:abhijeetmohanan@gmail.com" className="text-accent hover:opacity-60 transition-opacity" title="Email">
             &#9993;
           </a>
-          <a href="https://linkedin.com/in/abhijeet-mohanan" target="_blank" rel="noopener noreferrer" className="text-accent hover:opacity-70" title="LinkedIn">
+          <a href="https://linkedin.com/in/abhijeet-mohanan" target="_blank" rel="noopener noreferrer" className="text-accent hover:opacity-60 transition-opacity font-bold" title="LinkedIn">
             in
           </a>
-          <a href="https://github.com/abhijeetmohanan" target="_blank" rel="noopener noreferrer" className="text-accent hover:opacity-70" title="GitHub">
+          <a href="https://github.com/abhijeetmohanan" target="_blank" rel="noopener noreferrer" className="text-accent hover:opacity-60 transition-opacity" title="GitHub">
             &#128187;
           </a>
         </div>
