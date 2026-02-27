@@ -9,6 +9,9 @@ const Navigation = dynamic(() => import('./components/Navigation'), { ssr: false
 const About = dynamic(() => import('./components/About'), { ssr: false });
 const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
 const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
+const VideoHero = dynamic(() => import('./components/VideoHero'), { ssr: false });
+
+const VIDEO_URL = ''; // Add your video URL here (e.g., '/demo-reel.mp4')
 
 export default function Home() {
   const mode = useAppStore((state) => state.mode);
@@ -57,6 +60,7 @@ function HomeContent() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-4xl mx-auto text-center">
+        <VideoHero videoUrl={VIDEO_URL} />
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-accent">
           Abhijeet Mohanan
         </h1>
