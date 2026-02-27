@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Boot from './components/boot/Boot';
 import { useAppStore } from './store';
 import { useEffect } from 'react';
-import MascotBuddies from "./components/MascotsBuddies";
+import CornerStickmen from './components/CornerStickmen';
 
 const Navigation = dynamic(() => import('./components/Navigation'), { ssr: false });
 const About = dynamic(() => import('./components/About'), { ssr: false });
@@ -65,7 +65,7 @@ function HomeContent() {
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-accent">
           Abhijeet Mohanan
         </h1>
-        <MascotBuddies />
+        <CornerStickmen />
         <p className="text-2xl md:text-3xl text-text-muted font-mono mb-8">
           Infrastructure Engineer
         </p>
