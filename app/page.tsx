@@ -15,7 +15,7 @@ export default function Home() {
   const setMode = useAppStore((state) => state.setMode);
 
   useEffect(() => {
-    const path = window.location.pathname.replace('/', '');
+    const path = window.location.pathname.replace(/\//g, '').replace('index.html', '');
     if (path && path !== '' && path !== 'home') {
       if (path === 'about' || path === 'experience' || path === 'blog') {
         setMode(path);
@@ -25,10 +25,11 @@ export default function Home() {
 
   useEffect(() => {
     if (mode !== 'boot') {
-      const currentPath = window.location.pathname.replace('/', '');
-      const targetPath = mode === 'home' ? 'home' : mode;
-      if (currentPath !== targetPath) {
-        window.history.replaceState(null, '', `/${targetPath}`);
+      const currentPath = window.location.pathname.replace(/\//g, '').replace('index.html', '');
+      const targetPath = mode === 'home' ? '' : mode;
+      const expectedUrl = targetPath ? `/${targetPath}/` : '/';
+      if (window.location.pathname !== expectedUrl && window.location.pathname !== '/') {
+        window.history.replaceState(null, '', expectedUrl);
       }
     }
   }, [mode]);
