@@ -187,26 +187,26 @@ export default function CornerStickmen() {
       id: "top-left",
       label: "coding away",
       scene: <Typing />,
-      position: { top: "1rem", left: "1rem" },
+      position: { top: "calc(4rem + 16px)", left: "2rem" }, // 4rem = navbar height (h-16), +16px breathing room
     },
     {
       id: "top-right",
       label: "napping hard",
       scene: <Sleeping />,
-      position: { top: "1rem", right: "1rem" },
+      position: { top: "calc(4rem + 16px)", right: "2rem" },
       flip: true,
     },
     {
       id: "bottom-left",
       label: "coffee mode",
       scene: <Coffee />,
-      position: { bottom: "1rem", left: "1rem" },
+      position: { bottom: "calc(2rem - 3px)", left: "2rem" },
     },
     {
       id: "bottom-right",
       label: "fixing a bug",
       scene: <Boulder />,
-      position: { bottom: "1rem", right: "1rem" },
+      position: { bottom: "calc(2rem - 3px)", right: "2rem" },
       flip: true,
     },
   ];
@@ -248,3 +248,4 @@ export default function CornerStickmen() {
     </>
   );
 }
+
