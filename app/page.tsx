@@ -1,9 +1,14 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Boot from './components/boot/Boot';
 import { useAppStore } from './store';
 import React, { useEffect } from 'react';
 import Deployment from './components/deploy/Deployment'; // Assuming Deployment component will be here
+import Dashboard from './components/dashboard/Dashboard';
+
+const Scene = dynamic(() => import('./components/scene/Scene'), { ssr: false });
+const Terminal = dynamic(() => import('./components/terminal/Terminal'), { ssr: false });
 
 export default function Home() {
   const mode = useAppStore((state) => state.mode);

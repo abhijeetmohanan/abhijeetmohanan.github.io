@@ -200,9 +200,12 @@ const Scene: React.FC = () => {
       requestAnimationFrame(animate);
 
       // Rotate some objects for subtle animation
-      scene.getObjectByName('VPC')?.rotation.z += 0.001;
-      scene.getObjectByName('Load Balancer')?.rotation.y += 0.005;
-      scene.getObjectByName('Kubernetes Cluster')?.children.forEach(cube => cube.rotation.y += 0.01);
+      const vpc = scene.getObjectByName('VPC');
+      if (vpc) vpc.rotation.z += 0.001;
+      const lb = scene.getObjectByName('Load Balancer');
+      if (lb) lb.rotation.y += 0.005;
+      const k8s = scene.getObjectByName('Kubernetes Cluster');
+      if (k8s) k8s.children.forEach(cube => cube.rotation.y += 0.01);
 
       renderer.render(scene, camera);
       onHover(); // Check hover state on each frame
