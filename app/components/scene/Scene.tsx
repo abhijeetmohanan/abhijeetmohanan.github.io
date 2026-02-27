@@ -21,7 +21,7 @@ const Scene: React.FC = () => {
   const [sceneReady, setSceneReady] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
-  const [currentHovered, setCurrentHovered] = useState<THREE.Mesh | null>(null);
+
 
   const handleResize = useCallback((renderer: THREE.WebGLRenderer, camera: THREE.PerspectiveCamera) => {
     if (mountRef.current) {
@@ -55,62 +55,63 @@ const Scene: React.FC = () => {
     return group;
   }, []);
 
+  const hoveredRef = useRef<THREE.Mesh | null>(null);
+  const sceneRef = useRef<THREE.Scene | null>(null);
+  const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const mouseRef = useRef(new THREE.Vector2());
+  const raycasterRef = useRef(new THREE.Raycaster());
+  const animationIdRef = useRef<number | null>(null);
+  const interactableObjectsRef = useRef<THREE.Object3D[]>([]);
+
   useEffect(() => {
     if (isMobile) {
-      // If mobile, don't initialize Three.js scene, show static fallback.
-      // The parent component (Home) will handle rendering static UI.
       return;
     }
 
     if (!mountRef.current) return;
 
-    // Scene
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x0b0f17); // Match background color
+    scene.background = new THREE.Color(0x0b0f17);
+    sceneRef.current = scene;
 
-    // Camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 30, 50); // Adjusted for better view
+    camera.position.set(0, 30, 50);
     camera.lookAt(0, 0, 0);
+    cameraRef.current = camera;
 
-    // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mountRef.current.appendChild(renderer.domElement);
+    rendererRef.current = renderer;
     handleResize(renderer, camera);
 
-    // Lights
-    const ambientLight = new THREE.AmbientLight(0x404040, 5); // soft white light
+    const ambientLight = new THREE.AmbientLight(0x404040, 5);
     scene.add(ambientLight);
     const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
     directionalLight.position.set(5, 10, 7.5);
     scene.add(directionalLight);
 
-    // Objects
-    const interactableObjects: THREE.Object3D[] = [];
+    const objects: THREE.Object3D[] = [];
     experienceConfigs.forEach(config => {
       const obj = createObject(config);
       scene.add(obj);
-      interactableObjects.push(obj);
+      objects.push(obj);
     });
-
-    // Raycaster for interaction
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
+    interactableObjectsRef.current = objects;
 
     const onMouseMove = (event: MouseEvent) => {
       if (!mountRef.current) return;
-      mouse.x = (event.clientX / mountRef.current.clientWidth) * 2 - 1;
-      mouse.y = -(event.clientY / mountRef.current.clientHeight) * 2 + 1;
+      mouseRef.current.x = (event.clientX / mountRef.current.clientWidth) * 2 - 1;
+      mouseRef.current.y = -(event.clientY / mountRef.current.clientHeight) * 2 + 1;
     };
 
     const onClick = () => {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(interactableObjects, true);
+      raycasterRef.current.setFromCamera(mouseRef.current, camera);
+      const intersects = raycasterRef.current.intersectObjects(interactableObjectsRef.current, true);
 
       if (intersects.length > 0) {
         let object = intersects[0].object;
-        // If a child of a group (like Kubernetes cubes), get the parent group
         while (object.parent && object.parent !== scene && object.parent instanceof THREE.Group) {
           object = object.parent;
         }
@@ -121,9 +122,26 @@ const Scene: React.FC = () => {
       }
     };
 
+    const restoreMaterial = (mesh: THREE.Mesh) => {
+      const originalColor = (mesh.userData as any).originalColor;
+      if (originalColor !== undefined && mesh.material instanceof THREE.MeshPhongMaterial) {
+        mesh.material.color.setHex(originalColor);
+        mesh.material.emissive.setHex(0x000000);
+        mesh.material.emissiveIntensity = 0;
+      }
+    };
+
+    const applyHoverMaterial = (mesh: THREE.Mesh) => {
+      if (mesh.material instanceof THREE.MeshPhongMaterial) {
+        mesh.material.color.setHex(0x99ffff);
+        mesh.material.emissive.setHex(0x00ffff);
+        mesh.material.emissiveIntensity = 0.3;
+      }
+    };
+
     const onHover = () => {
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(interactableObjects, true);
+      raycasterRef.current.setFromCamera(mouseRef.current, camera);
+      const intersects = raycasterRef.current.intersectObjects(interactableObjectsRef.current, true);
 
       if (intersects.length > 0) {
         let object = intersects[0].object;
@@ -131,51 +149,31 @@ const Scene: React.FC = () => {
           object = object.parent;
         }
 
-        if (currentHovered && currentHovered !== object) {
-          // Restore previous hovered object's color
-          if ((currentHovered.userData as any).originalColor !== undefined) {
-            (currentHovered as THREE.Mesh).material = new THREE.MeshPhongMaterial({
-              color: (currentHovered.userData as any).originalColor,
-              flatShading: true
-            });
-          }
+        if (hoveredRef.current && hoveredRef.current !== object) {
+          restoreMaterial(hoveredRef.current);
         }
 
-        if (currentHovered !== object) {
-          // Apply hover glow
-          (object as THREE.Mesh).material = new THREE.MeshPhongMaterial({
-            color: 0x99ffff, // Brighter color for glow
-            emissive: 0x00ffff,
-            emissiveIntensity: 0.3,
-            flatShading: true
-          });
-          setCurrentHovered(object as THREE.Mesh);
+        if (hoveredRef.current !== object) {
+          applyHoverMaterial(object as THREE.Mesh);
+          hoveredRef.current = object as THREE.Mesh;
         }
       } else {
-        if (currentHovered) {
-          // Restore color if no longer hovering
-          if ((currentHovered.userData as any).originalColor !== undefined) {
-            (currentHovered as THREE.Mesh).material = new THREE.MeshPhongMaterial({
-              color: (currentHovered.userData as any).originalColor,
-              flatShading: true
-            });
-          }
-          setCurrentHovered(null);
+        if (hoveredRef.current) {
+          restoreMaterial(hoveredRef.current);
+          hoveredRef.current = null;
         }
       }
     };
 
-    // Animation loop
     const animate = () => {
-      requestAnimationFrame(animate);
+      animationIdRef.current = requestAnimationFrame(animate);
 
-      // Rotate pods
-      interactableObjects.forEach(obj => {
+      interactableObjectsRef.current.forEach(obj => {
         obj.rotation.y += 0.01;
       });
 
       renderer.render(scene, camera);
-      onHover(); // Check hover state on each frame
+      onHover();
     };
 
     window.addEventListener('resize', () => handleResize(renderer, camera));
@@ -183,15 +181,19 @@ const Scene: React.FC = () => {
     mountRef.current.addEventListener('click', onClick);
 
     animate();
-    setSceneReady(true); // Indicate scene is initialized
+    setSceneReady(true);
 
-    // Cleanup
     return () => {
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
       window.removeEventListener('resize', () => handleResize(renderer, camera));
       if (mountRef.current) {
         mountRef.current.removeEventListener('mousemove', onMouseMove);
         mountRef.current.removeEventListener('click', onClick);
-        mountRef.current.removeChild(renderer.domElement);
+        if (mountRef.current.contains(renderer.domElement)) {
+          mountRef.current.removeChild(renderer.domElement);
+        }
       }
       renderer.dispose();
       scene.traverse((object) => {
@@ -199,14 +201,17 @@ const Scene: React.FC = () => {
           object.geometry.dispose();
           if (Array.isArray(object.material)) {
             object.material.forEach(material => material.dispose());
-          } else {
+          } else if (object.material) {
             object.material.dispose();
           }
         }
       });
       scene.clear();
+      sceneRef.current = null;
+      cameraRef.current = null;
+      rendererRef.current = null;
     };
-  }, [setMode, setSelectedNode, isMobile, handleResize, createObject, currentHovered]);
+  }, [setSelectedNode, isMobile, handleResize, createObject]);
 
   if (isMobile) {
     return (

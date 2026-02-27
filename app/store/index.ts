@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type AppMode = "boot" | "deploying" | "scene" | "terminal" | "dashboard";
+type AppMode = "boot" | "scene" | "terminal" | "dashboard";
 
 interface AppState {
   mode: AppMode;

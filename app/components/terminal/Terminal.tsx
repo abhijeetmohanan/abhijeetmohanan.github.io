@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback, useMemo } from 'react';
 import { Terminal as XTerminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import 'xterm/css/xterm.css';
@@ -40,7 +40,7 @@ const Terminal: React.FC = () => {
     inputBuffer.current = '';
   }, [PROMPT]);
 
-  const commandHandlers: { [key: string]: CommandHandler } = {
+  const commandHandlers: Record<string, CommandHandler> = useMemo(() => ({
     help: () => helpContent,
     whoami: () => whoamiContent,
     ls: (args: string[]) => {
@@ -64,14 +64,14 @@ const Terminal: React.FC = () => {
       return 'Switching to dashboard...';
     },
     exit: () => {
-      setSelectedNode(null); // Clear selected node if any
+      setSelectedNode(null);
       setMode('scene');
       return 'Exiting terminal, returning to scene...';
     },
     clear: () => {
       xtermRef.current?.clear();
     }
-  };
+  }), [setMode, setSelectedNode]);
 
   const contactContent = () => {
     // Dynamically insert selectedNode if available, otherwise general contact

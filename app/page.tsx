@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic';
 import Boot from './components/boot/Boot';
 import { useAppStore } from './store';
 import React, { useEffect } from 'react';
-import Deployment from './components/deploy/Deployment'; // Assuming Deployment component will be here
 import Dashboard from './components/dashboard/Dashboard';
 
 const Scene = dynamic(() => import('./components/scene/Scene'), { ssr: false });
@@ -28,7 +27,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-accent font-mono">
       {mode === 'boot' && <Boot />}
-      {mode === 'deploying' && <Deployment />}
       {mode === 'scene' && <Scene />}
       {mode === 'terminal' && <Terminal />}
       {mode === 'dashboard' && <Dashboard />}

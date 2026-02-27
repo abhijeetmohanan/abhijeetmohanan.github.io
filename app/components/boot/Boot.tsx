@@ -27,7 +27,7 @@ const Boot: React.FC = () => {
         } else {
           clearInterval(interval);
           setTimeout(() => {
-            setMode('deploying');
+            setMode('scene');
           }, 1000);
         }
       }, 200);
