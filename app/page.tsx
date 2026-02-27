@@ -10,6 +10,7 @@ const About = dynamic(() => import('./components/About'), { ssr: false });
 const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
 const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
 const VideoHero = dynamic(() => import('./components/VideoHero'), { ssr: false });
+const Mascots = dynamic(() => import('./components/Mascots'), { ssr: false });
 
 const VIDEO_URL = ''; // Add your video URL here (e.g., '/demo-reel.mp4')
 
@@ -59,11 +60,12 @@ function HomeContent() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="max-w-4xl mx-auto text-center">
+      <div className="relative max-w-4xl mx-auto text-center">
         <VideoHero videoUrl={VIDEO_URL} />
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-accent">
           Abhijeet Mohanan
         </h1>
+        <Mascots />
         <p className="text-2xl md:text-3xl text-text-muted font-mono mb-8">
           Infrastructure Engineer
         </p>
