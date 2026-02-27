@@ -27,7 +27,7 @@ const Boot: React.FC = () => {
         } else {
           clearInterval(interval);
           setTimeout(() => {
-            setMode('scene');
+            setMode('home');
           }, 1000);
         }
       }, 200);

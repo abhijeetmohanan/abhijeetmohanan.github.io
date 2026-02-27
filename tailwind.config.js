@@ -8,11 +8,16 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#0b0f17',
-        accent: '#00f0ff',
+        background: 'var(--background)',
+        surface: 'var(--surface)',
+        accent: 'var(--accent)',
+        'accent-dim': 'var(--accent-dim)',
+        text: 'var(--text)',
+        'text-muted': 'var(--text-muted)',
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
       },
     },
   },
