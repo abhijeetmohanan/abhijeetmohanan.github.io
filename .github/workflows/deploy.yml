@@ -37,6 +37,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
+          publish_branch: gh-pages
 
 # Note on basePath:
 # The current next.config.js has basePath: "/portfolio" and assetPrefix: "/portfolio/".
