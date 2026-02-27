@@ -10,7 +10,6 @@ const About = dynamic(() => import('./components/About'), { ssr: false });
 const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
 const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
 const VideoHero = dynamic(() => import('./components/VideoHero'), { ssr: false });
-const RunningGopher = dynamic(() => import('./components/RunningGopher'), { ssr: false });
 
 const VIDEO_URL = ''; // Add your video URL here (e.g., '/demo-reel.mp4')
 
@@ -45,8 +44,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <main className="pt-16 min-h-screen relative">
-        {mode === 'home' && <RunningGopher />}
+      <main className="pt-16 min-h-screen">
         {mode === 'home' && <HomeContent />}
         {mode === 'about' && <About />}
         {mode === 'experience' && <Experience />}
@@ -67,7 +65,7 @@ function HomeContent() {
           Abhijeet Mohanan
         </h1>
         <p className="text-2xl md:text-3xl text-text-muted font-mono mb-8">
-          DevOps Engineer
+          Infrastructure Engineer
         </p>
         <p className="text-lg text-text-muted max-w-2xl mx-auto mb-12">
           Building scalable cloud infrastructure, automating deployments, 
