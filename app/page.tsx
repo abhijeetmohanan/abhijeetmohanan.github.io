@@ -18,14 +18,14 @@ export default function Home() {
   const mode = useAppStore((state) => state.mode);
   const setMode = useAppStore((state) => state.setMode);
 
+ // On load, read the hash and restore the correct mode
   useEffect(() => {
-    const path = window.location.pathname.replace(/\//g, '').replace('index.html', '');
-    if (path && path !== '' && path !== 'home') {
-      if (path === 'about' || path === 'experience' || path === 'blog') {
-        setMode(path);
-      }
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'about' || hash === 'experience' || hash === 'blog') {
+      setMode(hash);
     }
   }, []);
+
 
   useEffect(() => {
     if (mode !== 'boot') {
