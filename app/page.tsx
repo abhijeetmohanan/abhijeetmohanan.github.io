@@ -10,6 +10,7 @@ const About = dynamic(() => import('./components/About'), { ssr: false });
 const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
 const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
 const VideoHero = dynamic(() => import('./components/VideoHero'), { ssr: false });
+const RunningGopher = dynamic(() => import('./components/RunningGopher'), { ssr: false });
 
 const VIDEO_URL = ''; // Add your video URL here (e.g., '/demo-reel.mp4')
 
@@ -44,7 +45,8 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <main className="pt-16 min-h-screen">
+      <main className="pt-16 min-h-screen relative">
+        {mode === 'home' && <RunningGopher />}
         {mode === 'home' && <HomeContent />}
         {mode === 'about' && <About />}
         {mode === 'experience' && <Experience />}
