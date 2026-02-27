@@ -58,7 +58,7 @@ const Boot: React.FC = () => {
         tl.kill();
       };
     }
-  }, []);
+  }, [setMode]);
 
   const handleDeploy = () => {
     setMode('deploying');
