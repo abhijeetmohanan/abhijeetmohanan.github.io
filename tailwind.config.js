@@ -16,8 +16,8 @@ module.exports = {
         'text-muted': 'var(--text-muted)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
+        sans: ['Fira Code', 'monospace'],
+        mono: ['Fira Code', 'monospace'],
       },
     },
   },

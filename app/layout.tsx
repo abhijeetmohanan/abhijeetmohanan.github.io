@@ -1,10 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
-import Navigation from './components/Navigation';
+import { Fira_Code } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const jetbrains = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
+const firaCode = Fira_Code({ subsets: ['latin'], variable: '--font-fira' });
 
 export const metadata: Metadata = {
   title: 'Abhijeet Mohanan | DevOps Engineer',
@@ -17,11 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
+    <html lang="en" className={firaCode.variable}>
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-mono antialiased">
         {children}
       </body>
     </html>

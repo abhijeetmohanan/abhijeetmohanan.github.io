@@ -53,8 +53,8 @@ export default function Blog() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">
-        <span className="text-gradient">Blog</span>
+      <h1 className="text-4xl font-bold mb-8 text-accent">
+        Blog
       </h1>
 
       <p className="text-text-muted mb-8">
@@ -104,7 +104,7 @@ export default function Blog() {
       <div className="flex gap-4">
         <button
           onClick={() => setMode('home')}
-          className="px-6 py-3 rounded-lg font-medium bg-accent text-background hover:bg-accent/80 transition-all"
+          className="px-6 py-3 rounded-lg font-medium bg-accent text-black hover:bg-accent/80 transition-all"
         >
           Back to Home
         </button>

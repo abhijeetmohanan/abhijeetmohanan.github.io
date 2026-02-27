@@ -8,7 +8,6 @@ import { useEffect } from 'react';
 const Navigation = dynamic(() => import('./components/Navigation'), { ssr: false });
 const About = dynamic(() => import('./components/About'), { ssr: false });
 const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
-const Projects = dynamic(() => import('./components/Projects'), { ssr: false });
 const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
 
 export default function Home() {
@@ -31,7 +30,6 @@ export default function Home() {
         {mode === 'home' && <HomeContent />}
         {mode === 'about' && <About />}
         {mode === 'experience' && <Experience />}
-        {mode === 'projects' && <Projects />}
         {mode === 'blog' && <Blog />}
       </main>
     </>
@@ -44,8 +42,8 @@ function HomeContent() {
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-4xl mx-auto text-center">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6">
-          <span className="text-gradient">Abhijeet Mohanan</span>
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-accent">
+          Abhijeet Mohanan
         </h1>
         <p className="text-2xl md:text-3xl text-text-muted font-mono mb-8">
           DevOps Engineer
@@ -57,7 +55,7 @@ function HomeContent() {
         <div className="flex flex-wrap justify-center gap-4">
           <button
             onClick={() => setMode('experience')}
-            className="px-6 py-3 rounded-lg font-medium transition-all bg-accent text-background hover:bg-accent/80"
+            className="px-6 py-3 rounded-lg font-medium transition-all bg-accent text-black hover:bg-accent/80"
           >
             View Experience
           </button>
@@ -66,12 +64,6 @@ function HomeContent() {
             className="px-6 py-3 rounded-lg font-medium transition-all border border-accent text-accent hover:bg-accent/10"
           >
             About Me
-          </button>
-          <button
-            onClick={() => setMode('projects')}
-            className="px-6 py-3 rounded-lg font-medium transition-all border border-accent text-accent hover:bg-accent/10"
-          >
-            Projects
           </button>
         </div>
       </div>

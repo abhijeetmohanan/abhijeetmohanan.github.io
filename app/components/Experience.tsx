@@ -61,8 +61,8 @@ export default function Experience() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">
-        <span className="text-gradient">Experience</span>
+      <h1 className="text-4xl font-bold mb-8 text-accent">
+        Experience
       </h1>
 
       <section className="mb-12">
@@ -75,7 +75,7 @@ export default function Experience() {
             >
               <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
                 <div>
-                  <h3 className="text-xl font-semibold text-white">{exp.role}</h3>
+                  <h3 className="text-xl font-semibold text-accent">{exp.role}</h3>
                   <p className="text-accent">{exp.company}</p>
                 </div>
                 <span className="text-text-muted text-sm font-mono mt-2 md:mt-0">
@@ -104,7 +104,7 @@ export default function Experience() {
               className="bg-surface p-5 rounded-lg border border-accent/20 hover:border-accent/40 transition-colors"
             >
               <span className="text-2xl" dangerouslySetInnerHTML={{ __html: achievement.icon }} />
-              <h3 className="font-semibold text-white mt-2">{achievement.title}</h3>
+              <h3 className="font-semibold text-accent mt-2">{achievement.title}</h3>
               <p className="text-text-muted text-sm mt-1">{achievement.desc}</p>
             </div>
           ))}
@@ -113,10 +113,10 @@ export default function Experience() {
 
       <div className="flex gap-4">
         <button
-          onClick={() => setMode('projects')}
-          className="px-6 py-3 rounded-lg font-medium bg-accent text-background hover:bg-accent/80 transition-all"
+          onClick={() => setMode('blog')}
+          className="px-6 py-3 rounded-lg font-medium bg-accent text-black hover:bg-accent/80 transition-all"
         >
-          View Projects
+          Read Blog
         </button>
         <button
           onClick={() => setMode('home')}

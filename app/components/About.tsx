@@ -22,8 +22,8 @@ export default function About() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8">
-        <span className="text-gradient">About Me</span>
+      <h1 className="text-4xl font-bold mb-8 text-accent">
+        About Me
       </h1>
 
       <section className="mb-12">
@@ -114,7 +114,7 @@ export default function About() {
       <div className="flex gap-4">
         <button
           onClick={() => setMode('experience')}
-          className="px-6 py-3 rounded-lg font-medium bg-accent text-background hover:bg-accent/80 transition-all"
+          className="px-6 py-3 rounded-lg font-medium bg-accent text-black hover:bg-accent/80 transition-all"
         >
           View Experience
         </button>
