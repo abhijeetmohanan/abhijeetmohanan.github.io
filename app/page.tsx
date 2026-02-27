@@ -12,10 +12,24 @@ const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
 
 export default function Home() {
   const mode = useAppStore((state) => state.mode);
+  const setMode = useAppStore((state) => state.setMode);
+
+  useEffect(() => {
+    const path = window.location.pathname.replace('/', '');
+    if (path && path !== '' && path !== 'home') {
+      if (path === 'about' || path === 'experience' || path === 'blog') {
+        setMode(path);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (mode !== 'boot') {
-      window.history.replaceState(null, '', `/${mode === 'home' ? 'home' : mode}`);
+      const currentPath = window.location.pathname.replace('/', '');
+      const targetPath = mode === 'home' ? 'home' : mode;
+      if (currentPath !== targetPath) {
+        window.history.replaceState(null, '', `/${targetPath}`);
+      }
     }
   }, [mode]);
 

@@ -81,36 +81,6 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 text-accent">Contact</h2>
-        <div className="bg-surface p-6 rounded-lg border border-accent/20">
-          <div className="flex flex-col gap-3">
-            <a
-              href="mailto:abhijeetmohanan@gmail.com"
-              className="text-text-muted hover:text-accent transition-colors"
-            >
-              &#9993; abhijeetmohanan@gmail.com
-            </a>
-            <a
-              href="https://linkedin.com/in/abhijeet-mohanan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-accent transition-colors"
-            >
-              &#128279; linkedin.com/in/abhijeet-mohanan
-            </a>
-            <a
-              href="https://github.com/abhijeetmohanan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-muted hover:text-accent transition-colors"
-            >
-              &#128187; github.com/abhijeetmohanan
-            </a>
-          </div>
-        </div>
-      </section>
-
       <div className="flex gap-4">
         <button
           onClick={() => setMode('experience')}
