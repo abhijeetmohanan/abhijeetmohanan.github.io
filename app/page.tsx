@@ -52,7 +52,7 @@ function HomeContent() {
           Building scalable cloud infrastructure, automating deployments, 
           and enabling developer productivity through platform engineering.
         </p>
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
           <button
             onClick={() => setMode('experience')}
             className="px-6 py-3 rounded-lg font-medium transition-all bg-accent text-black hover:bg-accent/80"
@@ -65,6 +65,18 @@ function HomeContent() {
           >
             About Me
           </button>
+        </div>
+
+        <div className="flex justify-center gap-6 text-2xl">
+          <a href="mailto:abhijeetmohanan@gmail.com" className="text-accent hover:opacity-70" title="Email">
+            &#9993;
+          </a>
+          <a href="https://linkedin.com/in/abhijeet-mohanan" target="_blank" rel="noopener noreferrer" className="text-accent hover:opacity-70" title="LinkedIn">
+            in
+          </a>
+          <a href="https://github.com/abhijeetmohanan" target="_blank" rel="noopener noreferrer" className="text-accent hover:opacity-70" title="GitHub">
+            &#128187;
+          </a>
         </div>
       </div>
     </div>
