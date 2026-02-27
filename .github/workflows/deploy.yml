@@ -23,9 +23,6 @@ jobs:
       - name: Build Next.js project
         run: npm run build
 
-      - name: Export Next.js static site
-        run: npm run export # next export is typically handled by `next build` with output: 'export' in next.config.js for Next.js 13+
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
