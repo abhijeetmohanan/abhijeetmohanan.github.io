@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import Boot from './components/boot/Boot';
 import { useAppStore } from './store';
 import { useEffect } from 'react';
-import MascotBuddies from "./components/MascotBuddies";
+import MascotBuddies from "./components/MascotsBuddies";
 
 const Navigation = dynamic(() => import('./components/Navigation'), { ssr: false });
 const About = dynamic(() => import('./components/About'), { ssr: false });
