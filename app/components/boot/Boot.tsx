@@ -36,7 +36,7 @@ const Boot: React.FC = () => {
         clearInterval(interval);
       };
     }
-  }, []);
+  }, [setMode]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-green-400 font-mono p-4">

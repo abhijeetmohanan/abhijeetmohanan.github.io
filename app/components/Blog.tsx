@@ -8,43 +8,25 @@ interface BlogPost {
   date: string;
   readTime: string;
   tags: string[];
+  url: string;
 }
 
 const blogPosts: BlogPost[] = [
   {
-    title: 'Kubernetes Autoscaling with Karpenter',
-    excerpt: 'Learn how to implement cost-effective cluster autoscaling using Karpenter on AWS EKS.',
-    date: '2024-01-15',
+    title: 'A Pod with Public IP',
+    excerpt: 'Discover how to assign a public IP address and a dedicated security group to a Kubernetes Pod. Ideal for handling real-time streaming (RTP) in private subnets securely.',
+    date: '2022-09-22',
+    readTime: '5 min read',
+    tags: ['AWS', 'Kubernetes', 'Networking'],
+    url: 'https://dev.to/abhijeetmohanan/a-pod-with-public-ip-59m7',
+  },
+  {
+    title: 'Deploying kubernetes on containers using kind',
+    excerpt: 'Kind is an installation tool used to deploy kubernetes cluster in containers. Learn how to run local Kubernetes clusters using Docker container nodes for development and CI.',
+    date: '2021-06-25',
     readTime: '8 min read',
-    tags: ['Kubernetes', 'AWS', 'Karpenter'],
-  },
-  {
-    title: 'GitOps with ArgoCD - A Practical Guide',
-    excerpt: 'Set up declarative continuous deployment using ArgoCD and GitHub for your Kubernetes clusters.',
-    date: '2023-11-20',
-    readTime: '10 min read',
-    tags: ['GitOps', 'ArgoCD', 'DevOps'],
-  },
-  {
-    title: 'Reducing MTTR with Incident Automation',
-    excerpt: 'How we improved our incident response time by 40% using automation and proper tooling.',
-    date: '2023-09-05',
-    readTime: '6 min read',
-    tags: ['Incident Response', 'Automation', 'SRE'],
-  },
-  {
-    title: 'Building Reusable Terraform Modules',
-    excerpt: 'Best practices for creating modular, maintainable infrastructure as code.',
-    date: '2023-07-12',
-    readTime: '7 min read',
-    tags: ['Terraform', 'IaC', 'AWS'],
-  },
-  {
-    title: 'Observability Stack: Prometheus + Grafana + Loki',
-    excerpt: 'Set up comprehensive monitoring and logging for your cloud-native applications.',
-    date: '2023-05-28',
-    readTime: '12 min read',
-    tags: ['Observability', 'Prometheus', 'Grafana'],
+    tags: ['Kubernetes', 'Testing', 'Kind'],
+    url: 'https://dev.to/abhijeetmohanan/deploying-kubernetes-on-containers-using-kind-27l5',
   },
 ];
 
@@ -68,9 +50,14 @@ export default function Blog() {
             className="bg-surface p-6 rounded-lg border border-accent/20 hover:border-accent/40 transition-all hover:transform hover:-translate-y-1"
           >
             <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-              <h2 className="text-xl font-semibold text-white hover:text-accent cursor-pointer">
+              <a 
+                href={post.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-xl font-semibold text-text hover:text-accent transition-colors"
+              >
                 {post.title}
-              </h2>
+              </a>
               <span className="text-text-muted text-sm mt-2 md:mt-0 font-mono">
                 {post.date}
               </span>
@@ -94,7 +81,7 @@ export default function Blog() {
       </div>
 
       <div className="bg-surface p-6 rounded-lg border border-accent/20 mb-12">
-        <h3 className="text-lg font-semibold text-white mb-2">Want to write?</h3>
+        <h3 className="text-lg font-semibold text-text mb-2">Want to write?</h3>
         <p className="text-text-muted text-sm">
           I&apos;m always looking to share knowledge. If you have a topic idea or want to collaborate,
           reach out to me on LinkedIn or email.

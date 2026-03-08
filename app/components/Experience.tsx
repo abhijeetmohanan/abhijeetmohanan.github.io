@@ -1,15 +1,29 @@
 'use client';
 
 import { useAppStore } from '../store';
+import ProjectDiagramAnime from './ProjectDiagramAnime';
+import InfraWorldMap from './InfraWorldMap';
+import { motion } from 'framer-motion';
 
-interface Experience {
-  company: string;
-  role: string;
-  period: string;
-  highlights: string[];
-}
+const caseStudyData = {
+  items: [
+    { label: "Transit", x: 10, y: 50, type: 'user' as const },
+    { label: "Ingress", x: 30, y: 50, type: 'aws' as const },
+    { label: "Core Node", x: 60, y: 50, type: 'k8s' as const },
+    { label: "Scale-Layer", x: 60, y: 30, type: 'k8s' as const },
+    { label: "Monitor", x: 60, y: 70, type: 'k8s' as const },
+    { label: "Persistent", x: 90, y: 50, type: 'db' as const },
+  ],
+  connections: [
+    { from: 0, to: 1 },
+    { from: 1, to: 2 },
+    { from: 2, to: 5 },
+    { from: 2, to: 3 },
+    { from: 2, to: 4 },
+  ]
+};
 
-const experiences: Experience[] = [
+const experiences = [
   {
     company: 'Skit.ai',
     role: 'DevOps Engineer',
@@ -22,7 +36,6 @@ const experiences: Experience[] = [
       'Developed reusable Helm charts & Terraform modules',
       'Rolled out observability stack (Prometheus, Grafana, Loki)',
       'Improved pre-production uptime from 50% → 95%',
-      'Mentored interns on cloud-native fundamentals',
     ],
   },
   {
@@ -33,98 +46,76 @@ const experiences: Experience[] = [
       'Migrated workloads from bare-metal to AWS EKS using Terraform',
       'Automated infra rollouts, reducing delivery time by 70%',
       'Reduced infra costs by consolidating ALBs',
-      'Stabilized environments through proactive monitoring',
     ],
   },
-  {
-    company: 'Skit.ai (Vernacular.ai)',
-    role: 'DevOps Intern',
-    period: 'Apr 2021 - Jul 2021',
-    highlights: [
-      'Assisted with Kubernetes upgrades',
-      'Implemented syslog + Promtail logging integration',
-      'Evaluated monitoring solutions (Zabbix vs Prometheus)',
-      'Set up Label Studio for ML labeling pipelines',
-    ],
-  },
-];
-
-const achievements = [
-  { icon: '&#9889;', title: 'Autoscaling Platform', desc: 'Implemented Karpenter and KEDA for dynamic scaling' },
-  { icon: '&#128736;', title: 'Internal Developer Platform', desc: 'GitOps-driven IDP for self-service infrastructure' },
-  { icon: '&#9729;', title: 'Cloud Migration', desc: 'Migrated workloads to AWS EKS for scalability' },
-  { icon: '&#128200;', title: 'Observability', desc: 'Automated DORA metrics pipeline' },
 ];
 
 export default function Experience() {
   const setMode = useAppStore((state) => state.setMode);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-accent">
-        Experience
-      </h1>
+    <div className="max-w-6xl mx-auto px-6 py-20">
+      {/* Work in Progress Wireframe */}
+      <section className="mb-24 relative overflow-hidden rounded-[2rem] border border-accent/20 bg-accent/5 p-12 min-h-[400px] flex flex-col items-center justify-center text-center">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" 
+             style={{ backgroundImage: 'radial-gradient(var(--accent) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+        
+        <div className="relative z-10">
+          <div className="text-accent/40 font-mono text-[10px] tracking-[0.5em] uppercase mb-4 animate-pulse">
+            System Protocol // Laboratory Access
+          </div>
+          <h2 className="text-4xl md:text-6xl font-black italic tracking-tighter text-accent/80 mb-6">
+            WORK_IN_PROGRESS
+          </h2>
+          <div className="flex items-center justify-center gap-4 text-xs font-mono text-accent/50 uppercase tracking-widest">
+            <span className="w-12 h-[1px] bg-accent/20" />
+            Restricted Access
+            <span className="w-12 h-[1px] bg-accent/20" />
+          </div>
+        </div>
 
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-accent">Work History</h2>
-        <div className="space-y-6">
+        {/* Decorative Wireframe Elements */}
+        <div className="absolute top-8 left-8 w-16 h-16 border-t border-l border-accent/20" />
+        <div className="absolute top-8 right-8 w-16 h-16 border-t border-r border-accent/20" />
+        <div className="absolute bottom-8 left-8 w-16 h-16 border-b border-l border-accent/20" />
+        <div className="absolute bottom-8 right-8 w-16 h-16 border-b border-r border-accent/20" />
+      </section>
+
+      {/* Professional Timeline */}
+      <section className="mb-24">
+        <h2 className="text-2xl font-bold mb-12 text-accent border-b border-accent/10 pb-4 inline-block">Professional History</h2>
+        <div className="space-y-16">
           {experiences.map((exp, index) => (
-            <div
-              key={index}
-              className="bg-surface p-6 rounded-lg border border-accent/20"
-            >
-              <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-accent">{exp.role}</h3>
-                  <p className="text-accent">{exp.company}</p>
+            <div key={index} className="grid md:grid-cols-12 gap-8">
+              <div className="md:col-span-3">
+                <div className="sticky top-24">
+                  <div className="text-sm font-mono text-accent/60 mb-1">{exp.period}</div>
+                  <h3 className="text-xl font-bold text-text">{exp.company}</h3>
+                  <div className="text-accent font-medium">{exp.role}</div>
                 </div>
-                <span className="text-text-muted text-sm font-mono mt-2 md:mt-0">
-                  {exp.period}
-                </span>
               </div>
-              <ul className="space-y-2">
-                {exp.highlights.map((highlight, i) => (
-                  <li key={i} className="text-text-muted flex items-start gap-2">
-                    <span className="text-accent">&#8226;</span>
-                    {highlight}
-                  </li>
-                ))}
-              </ul>
+              <div className="md:col-span-9">
+                <ul className="grid sm:grid-cols-2 gap-6">
+                  {exp.highlights.map((highlight, i) => {
+                    const parts = highlight.split(/(\d+%|\d+\+)/g);
+                    return (
+                      <li key={i} className="group/item p-4 rounded-xl bg-surface/50 border border-accent/10 hover:border-accent/20 transition-all">
+                        <p className="text-text-muted text-sm leading-relaxed">
+                          {parts.map((part, index) => 
+                            /(\d+%|\d+\+)/.test(part) ? 
+                              <span key={index} className="text-accent font-bold">{part}</span> : 
+                              part
+                          )}
+                        </p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
       </section>
-
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-6 text-accent">Key Achievements</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          {achievements.map((achievement, index) => (
-            <div
-              key={index}
-              className="bg-surface p-5 rounded-lg border border-accent/20 hover:border-accent/40 transition-colors"
-            >
-              <span className="text-2xl" dangerouslySetInnerHTML={{ __html: achievement.icon }} />
-              <h3 className="font-semibold text-accent mt-2">{achievement.title}</h3>
-              <p className="text-text-muted text-sm mt-1">{achievement.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="flex gap-4">
-        <button
-          onClick={() => setMode('blog')}
-          className="px-6 py-3 rounded-lg font-medium bg-accent text-black hover:bg-accent/80 transition-all"
-        >
-          Read Blog
-        </button>
-        <button
-          onClick={() => setMode('home')}
-          className="px-6 py-3 rounded-lg font-medium border border-accent text-accent hover:bg-accent/10 transition-all"
-        >
-          Back to Home
-        </button>
-      </div>
     </div>
   );
 }

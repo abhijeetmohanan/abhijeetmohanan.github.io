@@ -33,13 +33,21 @@ export default function Navigation() {
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
                         ? 'bg-accent/10 text-accent'
-                        : 'text-gray-300 hover:text-accent hover:bg-accent/5'
+                        : 'text-text-muted hover:text-accent hover:bg-accent/5'
                     }`}
                   >
                     {item.name}
                   </button>
                 );
               })}
+              
+              <button
+                onClick={() => useAppStore.getState().toggleTheme()}
+                className="ml-4 p-2 rounded-md text-text-muted hover:text-accent hover:bg-accent/5 transition-all text-lg"
+                title="Toggle Theme"
+              >
+                {useAppStore((state) => state.theme === 'dark' ? '☀️' : '🌙')}
+              </button>
             </div>
           </div>
           <div className="md:hidden">

@@ -1,6 +1,7 @@
 'use client';
 
 import { useAppStore } from '../store';
+import GithubStats from './GithubStats';
 
 const skills = [
   { category: 'Cloud & Orchestration', items: ['Kubernetes', 'AWS', 'EKS', 'OpenShift', 'Linkerd', 'Istio'] },
@@ -64,6 +65,10 @@ export default function About() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="mb-12">
+        <GithubStats />
       </section>
 
       <section className="mb-12">

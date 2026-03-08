@@ -19,8 +19,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="font-mono antialiased">
+      <body className="font-mono antialiased" suppressHydrationWarning>
         {children}
+        <div className="fixed bottom-4 right-4 text-[10px] font-mono text-text-muted/50 uppercase tracking-widest pointer-events-none z-50">
+          built by antigravity [ gemini 3 flash ]
+        </div>
       </body>
     </html>
   );

@@ -11,12 +11,14 @@ const About = dynamic(() => import('./components/About'), { ssr: false });
 const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
 const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
 const VideoHero = dynamic(() => import('./components/VideoHero'), { ssr: false });
+const InfraPlayground = dynamic(() => import('./components/InfraPlayground'), { ssr: false });
 
 const VIDEO_URL = ''; // Add your video URL here (e.g., '/demo-reel.mp4')
 
 export default function Home() {
   const mode = useAppStore((state) => state.mode);
   const setMode = useAppStore((state) => state.setMode);
+  const setTheme = useAppStore((state) => state.setTheme);
 
  // On load, read the hash and restore the correct mode
   useEffect(() => {
@@ -24,7 +26,13 @@ export default function Home() {
     if (hash === 'about' || hash === 'experience' || hash === 'blog') {
       setMode(hash);
     }
-  }, []);
+    
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') as any;
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      setTheme(savedTheme);
+    }
+  }, [setMode, setTheme]);
 
 
   useEffect(() => {
@@ -51,6 +59,7 @@ export default function Home() {
         {mode === 'experience' && <Experience />}
         {mode === 'blog' && <Blog />}
       </main>
+      {mode === 'playground' && <InfraPlayground />}
     </>
   );
 }
@@ -62,14 +71,20 @@ function HomeContent() {
     <div className="min-h-screen flex items-center justify-center px-4">
       <div className="relative max-w-4xl mx-auto text-center">
         <VideoHero videoUrl={VIDEO_URL} />
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-accent">
+        <h1 className="text-5xl md:text-7xl font-bold mb-4 text-accent">
           Abhijeet Mohanan
         </h1>
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 mb-6 text-xl md:text-2xl font-mono text-accent/80">
+          <span>Kubernetes</span>
+          <span className="text-accent/30 hidden md:inline">•</span>
+          <span>AWS</span>
+          <span className="text-accent/30 hidden md:inline">•</span>
+          <span>Platform Engineering</span>
+          <span className="text-accent/30 hidden md:inline">•</span>
+          <span>GitOps</span>
+        </div>
         <CornerStickmen />
-        <p className="text-2xl md:text-3xl text-text-muted font-mono mb-8">
-          Infrastructure Engineer
-        </p>
-        <p className="text-lg text-text-muted max-w-2xl mx-auto mb-12">
+        <p className="text-lg text-text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
           Building scalable cloud infrastructure, automating deployments, 
           and enabling developer productivity through platform engineering.
         </p>
