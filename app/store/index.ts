@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-type AppMode = "boot" | "home" | "about" | "experience" | "projects" | "blog" | "playground";
+type AppMode = "boot" | "home" | "about" | "experience" | "projects" | "blog" | "playground" | "blog-sdtui";
 
 type AppTheme = "dark" | "light";
 

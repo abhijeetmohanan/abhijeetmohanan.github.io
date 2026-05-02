@@ -13,6 +13,14 @@ interface BlogPost {
 
 const blogPosts: BlogPost[] = [
   {
+    title: 'Managing systemd with Style: Introducing sdtui',
+    excerpt: 'A high-performance, Rust-based TUI for systemd unit management. Featuring live log streaming, regex highlighting, and a responsive multi-threaded engine.',
+    date: '2024-05-03',
+    readTime: '6 min read',
+    tags: ['Rust', 'TUI', 'systemd', 'Linux'],
+    url: '#blog-sdtui',
+  },
+  {
     title: 'A Pod with Public IP',
     excerpt: 'Discover how to assign a public IP address and a dedicated security group to a Kubernetes Pod. Ideal for handling real-time streaming (RTP) in private subnets securely.',
     date: '2022-09-22',
@@ -50,14 +58,23 @@ export default function Blog() {
             className="bg-surface p-6 rounded-lg border border-accent/20 hover:border-accent/40 transition-all hover:transform hover:-translate-y-1"
           >
             <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-              <a 
-                href={post.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-xl font-semibold text-text hover:text-accent transition-colors"
-              >
-                {post.title}
-              </a>
+              {post.url.startsWith('http') ? (
+                <a 
+                  href={post.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-xl font-semibold text-text hover:text-accent transition-colors"
+                >
+                  {post.title}
+                </a>
+              ) : (
+                <button
+                  onClick={() => setMode(post.url.replace('#', '') as any)}
+                  className="text-xl font-semibold text-text hover:text-accent transition-colors text-left"
+                >
+                  {post.title}
+                </button>
+              )}
               <span className="text-text-muted text-sm mt-2 md:mt-0 font-mono">
                 {post.date}
               </span>

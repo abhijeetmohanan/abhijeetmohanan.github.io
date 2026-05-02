@@ -10,6 +10,7 @@ const Navigation = dynamic(() => import('./components/Navigation'), { ssr: false
 const About = dynamic(() => import('./components/About'), { ssr: false });
 const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
 const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
+const SdtuiBlog = dynamic(() => import('./components/SdtuiBlog'), { ssr: false });
 const VideoHero = dynamic(() => import('./components/VideoHero'), { ssr: false });
 const InfraPlayground = dynamic(() => import('./components/InfraPlayground'), { ssr: false });
 
@@ -21,12 +22,11 @@ export default function Home() {
   const setTheme = useAppStore((state) => state.setTheme);
 
  // On load, read the hash and restore the correct mode
-  useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'about' || hash === 'experience' || hash === 'blog') {
-      setMode(hash);
-    }
-    
+ useEffect(() => {
+   const hash = window.location.hash.replace('#', '');
+   if (hash === 'about' || hash === 'experience' || hash === 'blog' || hash === 'blog-sdtui') {
+     setMode(hash as any);
+   }    
     // Initialize theme
     const savedTheme = localStorage.getItem('theme') as any;
     if (savedTheme === 'light' || savedTheme === 'dark') {
@@ -58,6 +58,7 @@ export default function Home() {
         {mode === 'about' && <About />}
         {mode === 'experience' && <Experience />}
         {mode === 'blog' && <Blog />}
+        {mode === 'blog-sdtui' && <SdtuiBlog />}
       </main>
       {mode === 'playground' && <InfraPlayground />}
     </>
