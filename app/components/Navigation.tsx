@@ -3,10 +3,11 @@
 import { useAppStore } from '../store';
 
 const navItems = [
-  { name: 'Home', mode: 'home' },
-  { name: 'About', mode: 'about' },
-  { name: 'Experience', mode: 'experience' },
-  { name: 'Blog', mode: 'blog' },
+  { name: '0:home', mode: 'home' },
+  { name: '1:about', mode: 'about' },
+  { name: '2:exp', mode: 'experience' },
+  { name: '3:blog', mode: 'blog' },
+  { name: '4:lab', mode: 'playground' },
 ];
 
 export default function Navigation() {
@@ -14,45 +15,39 @@ export default function Navigation() {
   const setMode = useAppStore((state) => state.setMode);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-accent/20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <button onClick={() => setMode('home')} className="font-mono text-xl font-bold text-accent hover:opacity-70">
-              AM
-            </button>
-          </div>
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-accent/30 font-mono text-sm">
+      <div className="max-w-6xl mx-auto px-2">
+        <div className="flex items-center justify-between h-10">
+          <div className="flex items-center space-x-1">
+            <span className="text-accent font-bold mr-4">[ABHIJEET@PORTFOLIO]</span>
+            <div className="hidden md:flex items-center space-x-0">
               {navItems.map((item) => {
                 const isActive = mode === item.mode;
                 return (
                   <button
                     key={item.name}
                     onClick={() => setMode(item.mode as any)}
-                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    className={`px-3 py-1 transition-colors ${
                       isActive
-                        ? 'bg-accent/10 text-accent'
-                        : 'text-text-muted hover:text-accent hover:bg-accent/5'
+                        ? 'bg-accent text-black font-bold'
+                        : 'text-accent hover:bg-accent/10'
                     }`}
                   >
-                    {item.name}
+                    {isActive ? `*${item.name}` : ` ${item.name}`}
                   </button>
                 );
               })}
-              
-              <button
-                onClick={() => useAppStore.getState().toggleTheme()}
-                className="ml-4 p-2 rounded-md text-text-muted hover:text-accent hover:bg-accent/5 transition-all text-lg"
-                title="Toggle Theme"
-              >
-                {useAppStore((state) => state.theme === 'dark' ? '☀️' : '🌙')}
-              </button>
             </div>
           </div>
+          
+          <div className="flex items-center text-accent/50 text-xs hidden sm:flex">
+             <span>{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+             <span className="ml-4 uppercase">{mode}</span>
+          </div>
+
           <div className="md:hidden">
             <select
-              className="bg-surface text-gray-300 px-3 py-2 rounded-md text-sm border border-accent/20"
+              className="bg-background text-accent text-xs border border-accent/30 py-1"
               value={mode}
               onChange={(e) => setMode(e.target.value as any)}
             >

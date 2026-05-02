@@ -22,24 +22,31 @@ export default function About() {
   const setMode = useAppStore((state) => state.setMode);
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-accent">
-        About Me
-      </h1>
+    <div className="max-w-4xl mx-auto px-4 py-12 font-mono">
+      <div className="mb-12 border-b border-accent/30 pb-6">
+        <h1 className="text-4xl font-bold mb-4 text-accent text-glow uppercase">
+          SYSTEM_INFO://ABOUT
+        </h1>
+        <p className="text-accent/60 italic">
+          Profile of a DevOps Engineer specializing in cloud-native platforms.
+        </p>
+      </div>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 text-accent">Who I Am</h2>
-        <div className="bg-surface p-6 rounded-lg border border-accent/20">
-          <p className="text-text-muted leading-relaxed mb-4">
+        <h2 className="text-xl font-bold mb-4 text-accent flex items-center">
+          <span className="mr-2 text-sm">#</span> WHO_AM_I
+        </h2>
+        <div className="terminal-window">
+          <p className="text-accent/80 leading-relaxed mb-4">
             I&apos;m a DevOps Engineer with 4+ years of experience in building and operating 
             cloud-native platforms. I specialize in Kubernetes, infrastructure automation, 
             and creating developer-friendly platforms.
           </p>
-          <p className="text-text-muted leading-relaxed mb-4">
+          <p className="text-accent/80 leading-relaxed mb-4">
             My passion lies in solving complex infrastructure challenges, reducing MTTR, 
             and enabling teams to ship software faster and more reliably.
           </p>
-          <p className="text-text-muted leading-relaxed">
+          <p className="text-accent/80 leading-relaxed">
             When I&apos;m not automating everything, you can find me exploring new cloud 
             technologies, contributing to open-source, or mentoring aspiring engineers.
           </p>
@@ -47,40 +54,46 @@ export default function About() {
       </section>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 text-accent">Tech Stack</h2>
-        <div className="grid md:grid-cols-2 gap-4">
+        <h2 className="text-xl font-bold mb-4 text-accent flex items-center">
+          <span className="mr-2 text-sm">#</span> TECH_STACK
+        </h2>
+        <div className="grid md:grid-cols-2 gap-6">
           {skills.map((skill) => (
-            <div key={skill.category} className="bg-surface p-4 rounded-lg border border-accent/20">
-              <h3 className="font-medium text-accent mb-3">{skill.category}</h3>
-              <div className="flex flex-wrap gap-2">
+            <div key={skill.category} className="terminal-window">
+              <h3 className="font-bold text-accent mb-4 underline uppercase text-sm">{skill.category}</h3>
+              <ul className="prompt-list space-y-1">
                 {skill.items.map((item) => (
-                  <span
-                    key={item}
-                    className="px-3 py-1 bg-background text-text-muted text-sm rounded-full border border-accent/10"
-                  >
+                  <li key={item} className="text-accent/80 text-sm">
                     {item}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>
       </section>
 
       <section className="mb-12">
-        <GithubStats />
+        <h2 className="text-xl font-bold mb-4 text-accent flex items-center">
+          <span className="mr-2 text-sm">#</span> GIT_METRICS
+        </h2>
+        <div className="terminal-window overflow-x-auto">
+          <GithubStats />
+        </div>
       </section>
 
       <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 text-accent">Certifications</h2>
-        <div className="grid md:grid-cols-2 gap-3">
+        <h2 className="text-xl font-bold mb-4 text-accent flex items-center">
+          <span className="mr-2 text-sm">#</span> CERTIFICATIONS
+        </h2>
+        <div className="grid md:grid-cols-2 gap-4">
           {certifications.map((cert) => (
             <div
               key={cert}
-              className="bg-surface p-4 rounded-lg border border-accent/20 flex items-center gap-3"
+              className="terminal-window flex items-center gap-3 text-sm"
             >
-              <span className="text-accent">&#10003;</span>
-              <span className="text-text-muted">{cert}</span>
+              <span className="text-accent">[OK]</span>
+              <span className="text-accent/80">{cert}</span>
             </div>
           ))}
         </div>
@@ -89,15 +102,15 @@ export default function About() {
       <div className="flex gap-4">
         <button
           onClick={() => setMode('experience')}
-          className="px-6 py-3 rounded-lg font-medium bg-accent text-black hover:bg-accent/80 transition-all"
+          className="px-6 py-2 border border-accent text-accent hover:bg-accent hover:text-black transition-all"
         >
-          View Experience
+          &gt; VIEW_EXP.EXE
         </button>
         <button
           onClick={() => setMode('home')}
-          className="px-6 py-3 rounded-lg font-medium border border-accent text-accent hover:bg-accent/10 transition-all"
+          className="px-6 py-2 border border-accent text-accent hover:bg-accent hover:text-black transition-all"
         >
-          Back to Home
+          &lt;-- CD ..
         </button>
       </div>
     </div>

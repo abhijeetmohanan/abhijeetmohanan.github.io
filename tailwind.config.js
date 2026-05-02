@@ -10,16 +10,20 @@ module.exports = {
       colors: {
         background: 'var(--background)',
         surface: 'var(--surface)',
-        accent: 'var(--accent)',
-        'accent-dim': 'var(--accent-dim)',
+        accent: '#4ade80', // terminal green
+        'accent-dim': 'rgba(74, 222, 128, 0.2)',
         text: 'var(--text)',
         'text-muted': 'var(--text-muted)',
+        'terminal-green': '#4ade80',
+        'terminal-dark': '#0a0a0a',
       },
       fontFamily: {
-        sans: ['Fira Code', 'monospace'],
-        mono: ['Fira Code', 'monospace'],
+        sans: ['JetBrains Mono', 'monospace'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
