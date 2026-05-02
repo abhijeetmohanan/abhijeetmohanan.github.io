@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useAppStore } from '../store';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface BlogPost {
   slug: string;
@@ -29,7 +31,6 @@ export default function Blog() {
         setPosts(data);
         setLoading(false);
         
-        // Handle direct linking via hash if needed
         const hash = window.location.hash.replace('#blog-', '');
         if (hash) {
           const post = data.find((p: BlogPost) => p.slug === hash);
@@ -72,9 +73,30 @@ export default function Blog() {
           <div className="prose prose-invert prose-accent max-w-none 
             prose-headings:text-accent prose-headings:font-bold prose-headings:uppercase
             prose-p:text-accent/80 prose-strong:text-accent prose-code:text-accent 
-            prose-code:bg-accent/10 prose-code:px-1 prose-pre:bg-black prose-pre:border prose-pre:border-accent/20
+            prose-code:bg-accent/10 prose-code:px-1 prose-pre:bg-transparent prose-pre:p-0
             prose-a:text-accent prose-a:underline hover:prose-a:text-white">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown 
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code({node, inline, className, children, ...props}: any) {
+                  const match = /language-(\w+)/.exec(className || '');
+                  return !inline && match ? (
+                    <SyntaxHighlighter
+                      style={vscDarkPlus}
+                      language={match[1]}
+                      PreTag="div"
+                      {...props}
+                    >
+                      {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  );
+                }
+              }}
+            >
               {selectedPost.content}
             </ReactMarkdown>
           </div>
