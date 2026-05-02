@@ -4,18 +4,20 @@ import { useAppStore } from '../store';
 import GithubStats from './GithubStats';
 
 const skills = [
-  { category: 'Cloud & Orchestration', items: ['Kubernetes', 'AWS', 'EKS', 'OpenShift', 'Linkerd', 'Istio'] },
-  { category: 'Infrastructure as Code', items: ['Terraform', 'CloudFormation', 'Ansible'] },
-  { category: 'CI/CD & GitOps', items: ['Jenkins', 'GitLab CI', 'ArgoCD', 'GitHub Actions'] },
-  { category: 'Observability', items: ['Prometheus', 'Grafana', 'Loki', 'Tempo', 'OpenTelemetry'] },
-  { category: 'Languages', items: ['Python', 'Bash', 'Go'] },
+  { category: 'Cloud & Orchestration', items: ['AWS (EKS, EC2, RDS, VPC)', 'Kubernetes', 'EKS', 'OpenShift', 'ArgoCD', 'Karpenter', 'KEDA'] },
+  { category: 'Infrastructure as Code', items: ['Terraform', 'CloudFormation', 'Ansible', 'Helm', 'Kustomize'] },
+  { category: 'CI/CD & Security', items: ['GitLab CI', 'Trivy', 'AWS Inspector', 'DevSecOps'] },
+  { category: 'Observability & SRE', items: ['Prometheus', 'Grafana', 'Loki', 'Pyroscope', 'Opsgenie', 'Incident Management'] },
+  { category: 'Networking & Telephony', items: ['VPC Design', 'SIP/VoIP', 'OpenSIPS', 'RTPEngine', 'Linkerd', 'Teleport'] },
+  { category: 'Languages & DB', items: ['Python', 'Bash', 'HCL', 'PostgreSQL', 'Redis'] },
 ];
 
 const certifications = [
   'CKA - Certified Kubernetes Administrator',
   'RHCE - Red Hat Certified Engineer',
-  'OpenShift Specialist',
   'RHCSA - Red Hat Certified System Administrator',
+  'Red Hat Certified Specialist in Ansible Automation',
+  'Red Hat Certified Specialist in OpenShift Administration',
 ];
 
 export default function About() {
@@ -28,7 +30,7 @@ export default function About() {
           SYSTEM_INFO://ABOUT
         </h1>
         <p className="text-accent/60 italic">
-          Profile of a DevOps Engineer specializing in cloud-native platforms.
+          Platform & Site Reliability Engineer with 5 years of experience building cloud-native infrastructure.
         </p>
       </div>
 
@@ -38,17 +40,19 @@ export default function About() {
         </h2>
         <div className="terminal-window">
           <p className="text-accent/80 leading-relaxed mb-4">
-            I&apos;m a DevOps Engineer with 4+ years of experience in building and operating 
-            cloud-native platforms. I specialize in Kubernetes, infrastructure automation, 
-            and creating developer-friendly platforms.
+            I am a Platform and Site Reliability Engineer specializing in building and operating 
+            mission-critical, cloud-native production infrastructure. As a sole platform owner, 
+            I&apos;ve architected multi-region AWS distributed systems across India, US, and Canada.
           </p>
           <p className="text-accent/80 leading-relaxed mb-4">
-            My passion lies in solving complex infrastructure challenges, reducing MTTR, 
-            and enabling teams to ship software faster and more reliably.
+            My expertise lies in building Infrastructure as Code platforms from the ground up 
+            using Terraform and Kubernetes, enabling microservices to ship reliably at scale. 
+            I am particularly passionate about autonomous systems, having built LLM-driven 
+            alerting and remediation loops.
           </p>
           <p className="text-accent/80 leading-relaxed">
-            When I&apos;m not automating everything, you can find me exploring new cloud 
-            technologies, contributing to open-source, or mentoring aspiring engineers.
+            Based in Bengaluru, I focus on FinOps, DevSecOps, and scaling infrastructure 
+            for high-demand conversational AI platforms.
           </p>
         </div>
       </section>
@@ -86,7 +90,7 @@ export default function About() {
         <h2 className="text-xl font-bold mb-4 text-accent flex items-center">
           <span className="mr-2 text-sm">#</span> CERTIFICATIONS
         </h2>
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-1 gap-4">
           {certifications.map((cert) => (
             <div
               key={cert}
