@@ -27,10 +27,10 @@ export default function About() {
     <div className="max-w-4xl mx-auto px-4 py-12 font-mono">
       <div className="mb-12 border-b border-accent/30 pb-6">
         <h1 className="text-4xl font-bold mb-4 text-accent text-glow uppercase">
-          SYSTEM_INFO://ABOUT
+          USER_PROFILE://ABHIJEET
         </h1>
         <p className="text-accent/60 italic">
-          Platform & Site Reliability Engineer with 5 years of experience building cloud-native infrastructure.
+          Engineer by day, tinkerer by night. A human behind the terminal.
         </p>
       </div>
 
@@ -40,19 +40,16 @@ export default function About() {
         </h2>
         <div className="terminal-window">
           <p className="text-accent/80 leading-relaxed mb-4">
-            I am a Platform and Site Reliability Engineer specializing in building and operating 
-            mission-critical, cloud-native production infrastructure. As a sole platform owner, 
-            I&apos;ve architected multi-region AWS distributed systems across India, US, and Canada.
+            Hey there! I&apos;m Abhijeet. While my day job involves orchestrating complex multi-region Kubernetes clusters and battling with Terraform state files, there&apos;s a lot more to me than just cloud infrastructure.
           </p>
           <p className="text-accent/80 leading-relaxed mb-4">
-            My expertise lies in building Infrastructure as Code platforms from the ground up 
-            using Terraform and Kubernetes, enabling microservices to ship reliably at scale. 
-            I am particularly passionate about autonomous systems, having built LLM-driven 
-            alerting and remediation loops.
+            I firmly believe that technology is just a tool to solve human problems. I love the feeling of building something from scratch, whether that&apos;s a highly available conversational AI platform at work or a quirky weekend project that automates a tiny part of my life.
           </p>
-          <p className="text-accent/80 leading-relaxed">
-            Based in Bengaluru, I focus on FinOps, DevSecOps, and scaling infrastructure 
-            for high-demand conversational AI platforms.
+          <p className="text-accent/80 leading-relaxed mb-4">
+            When I&apos;m not staring at a terminal screen or deciphering logs, you can find me exploring the vibrant streets of Bengaluru, learning about autonomous systems, or just unwinding with a good cup of coffee. I value continuous learning, empathy in engineering, and building tools that make people&apos;s lives just a little bit easier.
+          </p>
+          <p className="text-accent/80 leading-relaxed italic border-l-2 border-accent/50 pl-4 mt-6">
+            &quot;Any sufficiently advanced technology is indistinguishable from magic, but it&apos;s the humans who cast the spells.&quot;
           </p>
         </div>
       </section>
