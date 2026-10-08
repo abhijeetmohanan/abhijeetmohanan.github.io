@@ -10,9 +10,16 @@ const navItems = [
   { name: '4:lab', mode: 'playground' },
 ];
 
+import { useState, useEffect } from 'react';
+
 export default function Navigation() {
   const mode = useAppStore((state) => state.mode);
   const setMode = useAppStore((state) => state.setMode);
+  const [time, setTime] = useState('');
+
+  useEffect(() => {
+    setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-accent/30 font-mono text-sm">
@@ -41,8 +48,8 @@ export default function Navigation() {
           </div>
           
           <div className="flex items-center text-accent/50 text-xs hidden sm:flex">
-             <span>{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
-             <span className="ml-4 uppercase">{mode}</span>
+             <span>{time}</span>
+            <span className="ml-4 uppercase">{mode}</span>
           </div>
 
           <div className="md:hidden">
