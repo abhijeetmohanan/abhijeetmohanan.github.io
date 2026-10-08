@@ -6,11 +6,11 @@ import { useAppStore } from './store';
 import { useEffect } from 'react';
 import CornerStickmen from './components/CornerStickmen';
 
-const Navigation = dynamic(() => import('./components/Navigation'));
-const About = dynamic(() => import('./components/About'));
-const Experience = dynamic(() => import('./components/Experience'));
-const Blog = dynamic(() => import('./components/Blog'));
-const VideoHero = dynamic(() => import('./components/VideoHero'));
+const Navigation = dynamic(() => import('./components/Navigation'), { ssr: false });
+const About = dynamic(() => import('./components/About'), { ssr: false });
+const Experience = dynamic(() => import('./components/Experience'), { ssr: false });
+const Blog = dynamic(() => import('./components/Blog'), { ssr: false });
+const VideoHero = dynamic(() => import('./components/VideoHero'), { ssr: false });
 const InfraPlayground = dynamic(() => import('./components/InfraPlayground'), { ssr: false });
 
 const VIDEO_URL = ''; // Add your video URL here (e.g., '/demo-reel.mp4')

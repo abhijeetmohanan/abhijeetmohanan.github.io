@@ -13,7 +13,7 @@ interface AppState {
 }
 
 export const useAppStore = create<AppState>((set) => ({
-  mode: "home",
+  mode: "boot",
   theme: "dark",
   setMode: (mode) => set({ mode }),
   setTheme: (theme) => {
